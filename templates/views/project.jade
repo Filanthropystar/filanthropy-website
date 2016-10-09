@@ -1,0 +1,31 @@
+extends ../layouts/default
+
+block opengraph
+	meta(property="og:type" content="article")
+	if Project.bannerImage.exists
+		meta(property="og:image" content="#{Project.bannerImage.url}")
+		meta(name="twitter:image:src" content="#{Project.bannerImage.url}")
+	meta(property="og:description" content="#{utils.cropString( utils.htmlToText(Project.description), 240, '...', true )}")
+	meta(property="twitter:description" content="#{utils.cropString( utils.htmlToText(Project.description), 240, '...', true )}")
+	meta(property="article:publisher" content="#{facebook_page}" )
+
+block content
+	.container-md
+		.page-intro.text-left
+			a(href='/projects').text-muted &larr; Back to all projects
+			.meetup-content
+				if Project.bannerImage
+							img(src=Project.bannerImage.url).project-banner-image
+				h2.mv-5= Project.name
+				div.row.project-socials
+					if Project.website
+						a(href=Project.website, target='_blank', data-toggle='tooltip', data-title=Project.website, data-placement='top').entypo.entypo-globe.project-contact
+
+					if Project.twitterName
+						a(href='https://twitter.com/' + Project.twitterName, target='_blank', data-toggle='tooltip', data-title='@' + Project.twitterName, data-placement='top' ).entypo-social.entypo-twitter.project-contact
+					
+					if Project.facebook
+						a(href='https://facebook.com/' + Project.facebook, target='_blank', data-toggle='tooltip', data-title='@' + Project.facebook, data-placement='top').entypo-social.entypo-facebook.project-contact
+
+				p!= Project.description
+

@@ -1,0 +1,12 @@
+mixin event-project(project)
+	li.row.talk
+		.col-xs-9.col-sm-10
+			.talk-summary
+				h4.title 
+					a(href='/projects/' + project.key, itemprop='url')=project.name
+				if project.shortDescription
+					!=project.shortDescription
+				if project.link
+					a(href=project.link, target='_blank', title='View the website for this project')
+						| #{project.link} 
+						span.entypo.entypo-chevron-small-right

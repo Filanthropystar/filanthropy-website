@@ -1,0 +1,13 @@
+mixin projectTile(project)
+	.col-lg-6
+		.project-tile
+			a(href='/projects/' + project.key)
+				
+				if project.bannerImage.exists
+					img.project-tile-image(src=project.bannerImage.url, alt=project.name)
+				else
+					.project-tile-noimage
+				.text-background
+				h2.project-tile-title=project.name
+				if(project.shortDescription)
+					span.project-tile-text!=project.shortDescription

@@ -1,23 +1,58 @@
 extends ../layouts/default
 
-block content
-	.container: .jumbotron
-		img(src='/images/logo.svg', width='160')
-		h1 Welcome
-		p This is your new <a href='http://keystonejs.com' target='_blank'>KeystoneJS</a> website.
-		p It includes the latest versions of
-			| <a href='http://getbootstrap.com/' target='_blank'>Bootstrap</a>
-			| and <a href='http://www.jquery.com/' target='_blank'>jQuery</a>.
-		p Visit the <a href='http://keystonejs.com/guide' target='_blank'>Getting Started</a> guide to learn how to customise it.
-		hr
-		if user && user.canAccessKeystone
-			p
-				a(href='/keystone').btn.btn-lg.btn-primary Open the Admin UI
-		else
-			p We have created a default Admin user for you with the email <strong>user@keystonejs.com</strong> and the password <strong>admin</strong>.
-			p
-				a(href='/keystone/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
-				|  to use the Admin UI.
-		hr
-		p Remember to <a href='https://github.com/keystonejs/keystone' target='_blank'>Star KeystoneJS on GitHub</a> and
-			| <a href='https://twitter.com/keystonejs' target='_blank'>follow @keystonejs</a> on twitter for updates.
+
+//- INCLUDES
+
+//- INTRO
+block intro
+
+
+		article#hero.hero-meetup.hero-meetup--next
+			
+			//- Intro
+			
+			section.hero-intro.hero-intro--hasmask
+				.hero-background
+					//-img(src='/images/placeholders/sydney-1.jpg')
+				.hero-intro-content
+					h1.main_logo_text FILANTHROPY*
+					div.filanthropy_font.filanthropy_sub
+						span.red_text PEOPLE
+						span *
+						span.mustard_text PLANET
+						span *
+						span.azure_text PARTIES
+					div.filanthropy_font.filanthropy_sub_level2 *LIKE PHILANTHROPY BUT BETTER
+			//- Details
+			section.hero-details: .container
+				.row: .col-sm-10.col-sm-offset-1: .row
+					h4.page-title What is Filanthropy*?
+					p.lead It's quite simple – the team organise brilliantly fun parties that cultivate collaboration for social change.
+					
+
+					p Three selected, inspirational social entrepreneurs share their stories and break down how they would spend £1,000.
+					p Then between a crowd of creative curious hearts, the aim is to help each project reach that target. 
+					p There is an opportunity to ask questions, chat to the entrepreneurs and mix in some drinks and merriment with networking (or friend-making).
+					p The beauty of crowdfunding is that whether you’re a student, investor, advertising guru, chef, clown, events producer or entrepreneur, you can contribute either funds or time in collaboration with others, amplifying your personal capacity to…well…kinda, sorta, a little bit, change the world.
+					p There’s a £10 minimum donation to any one of the three projects.
+					
+					
+					p We've raised over £14000 since November 2013 for many deserving projects.
+					p Keep an eye on our Twitter feed to be notified about our next event.
+			
+					p.mt-1
+						a(href='/about') Learn more about Filanthropy*
+						
+						
+					p.mt-1: a(href="https://twitter.com/filanthropystar", class="twitter-follow-button", data-show-count="true", data-size="large") Follow @filanthopystar
+					
+					
+//- JS
+block js
+	//- twitter
+	script.
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+	//- map
+	if google_api_key
+		script(src!='https://maps.googleapis.com/maps/api/js?key=' + google_api_key + '&sensor=false&libraries=places')
+		script(src='/js/views/index.js')

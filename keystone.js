@@ -64,10 +64,10 @@ keystone.set('email locals', {
 keystone.set('email tests', require('./routes/emails'));
 
 
-// Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
-	posts: ['posts', 'post-categories'],
-	users: 'users',
+	'events': ['FilanthropyEvent', 'Project'],
+	'members': ['users'],
+	'posts': ['posts', 'post-categories']
 });
 
 // Start Keystone to connect to your database and initialise the web server

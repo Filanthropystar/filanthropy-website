@@ -1,0 +1,68 @@
+extends ../layouts/default
+
+include ../mixins/member
+
+block opengraph
+	meta(property="og:type" content="article")
+	
+	meta(property="og:description" content ="About the people who are Filanthropy*")
+	meta(name="twitter:description" content="About the people who are Filanthropy*")
+	meta(name="twitter:image:src" content="http://www.filanthropystar.org/images/joinFilanthropy.jpg")
+	meta(property="og:image" content="http://www.filanthropystar.org/images/joinFilanthropy.jpg")
+	meta(property="article:publisher" content="#{facebook_page}" )
+
+
+block intro
+			.page-content
+				img(src='/images/joinfilanthropy.jpg').page-header-image
+				//- CODE
+				.section: .container-md
+					h1.page-title About
+					p.lead What do we do? It's quite simple – the team organises brilliantly fun parties that cultivate collaboration for social change.
+
+					h2 How our parties work
+					
+					h3 How we choose our projects
+					p We put out an application form out few months before each event and then have the difficult job of choosing 3 projects from the great applications we receive. 
+
+					h3 And then…
+					p We organise a party and invite you lot and your mates to come along and support these epic projects. We often come up with a theme, get musicians or DJs involved, bring in entertainment and all that’s needed for merry making.
+					
+					h3 You come along on the night
+					p We charge you a tenner on the door – which is sort of like a voucher for you to use to support the projects that are presenting. 
+
+					p On the night each project has 5 minutes to tell the crowd what they are about and what they will do with funds raised (we aim to reach about £1000 for each). There is time for questions and for you to chat with the projects and hear their stories in more details. 
+
+					p So you get to mingle, be entertained, meet some awesome people, have a drink AND listen to 3 incredible stories of fellow Londoners who are set on making the world a better place. 
+
+					h3 Then what?
+
+					p Well, you get to help them do what they are doing. 
+
+					p The projects leave the room and you decide which one that tenner you paid on the door goes to. You can give more if you like, or offer your time to volunteer and help the project with your skills. 
+
+					p It’s kind of like Dragon’s Den, but not.  
+					p It’s crowd-funding, but in a room. Face-to-face. Where you get to experience 1st hand just how far that tenner you paid on the door can go. 
+
+					p Whether you’re a student, investor, graphic designer, chef, clown, events producer or entrepreneur, you can contribute more funds or time in collaboration with others, amplifying your personal capacity to…well…kinda, sorta, a little bit, change the world.
+
+					//:markdown
+						//Up for it? Come along to our [next event](/events) and see what all the fuss is about. 
+
+					hr.mv-3
+
+					if currentMembers.length
+						.members-group
+							h3.text-caps.mb-1 The Filanthropy* Team
+							p We are a bunch of volunteers who leverage our skills and our love of a good party to make a difference. 
+							ul.list-unstyled.members-list
+								li.grid-sizer
+								each member in currentMembers
+									+member(member)
+
+				
+				
+block js
+	// twitter
+	script.
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

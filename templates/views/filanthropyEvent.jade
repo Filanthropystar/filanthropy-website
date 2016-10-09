@@ -1,0 +1,72 @@
+extends ../layouts/default
+
+
+block opengraph
+	meta(property="og:type" content="article")
+	if ev.bannerImage.exists
+		meta(property="og:image" content="#{ev.bannerImage.url}")
+		meta(name="twitter:image:src" content="#{ev.bannerImage.url}")
+	meta(property="og:description" content="#{utils.cropString( utils.htmlToText(ev.description), 240, '...', true )}")
+	meta(name="twitter:description" content="#{utils.cropString( utils.htmlToText(ev.description), 240, '...', true )}")
+	meta(property="article:publisher" content="#{facebook_page}" )
+
+	if ev.state == 'past' && ev.review
+		meta(name="twitter:description" content="#{utils.cropString( utils.htmlToText(ev.review), 240, '...', true )}")
+	else
+		meta(name="twitter:description" content="#{utils.cropString( utils.htmlToText(ev.description), 240, '...', true )}")
+
+block content
+	.container-md
+		.page-intro.text-left
+			a(href='/events').text-muted &larr; Back to all events
+		.page-content
+				.tile.ph-1.pv-1
+					.meetup-calendar.calendar.hidden-xs.hidden-sm
+						.calendar__header=ev._.startDate.format('MMM')
+						.calendar__body
+							.calendar__date=ev._.startDate.format('DD')
+							.calendar__year=ev._.startDate.format('YYYY')
+					.meetup-content
+						if ev.bannerImage
+							img(src=ev.bannerImage.url).event-banner-image
+						h2.mv-5=ev.name
+						h5.mb-1=ev._.startDate.format('dddd D MMM YYYY')
+							|  from #{ev._.startDate.format('h:mma')} - #{ev._.endDate.format('h:mma')}
+						if(ev.place)
+							h5.mb-1=ev.place
+							//if ev.state == 'active' || ev.state == 'scheduled' && ev.map
+								//div=ev.map + ' '
+								//	span | 
+								//	a(href='http://maps.google.co.uk/?daddr='+ ev.map, target='_blank') Get Directions
+						if ev.facebook
+							span.entypo-social.entypo-facebook.project-contact
+							a(href=ev.facebook, target='_blank', data-toggle='tooltip', data-placement='top')=ev.name
+						if ev.raised
+							h6 You raised £ #{ev.raised}!
+						p
+						if ev.state == 'past' && ev.review
+							p!= ev.review
+						else
+							p!= ev.description
+						if flickr_id
+							#gallery
+
+						
+block css
+	if(flickr_id && ev.photoAlbumId)
+		link(href="https://cdnjs.cloudflare.com/ajax/libs/nanogallery/5.4.0/css/nanogallery.min.css", rel="stylesheet")
+
+block js
+	if flickr_id && ev.photoAlbumId
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/nanogallery/5.4.0/jquery.nanogallery.min.js")
+
+		script.
+
+			jQuery(document).ready(function () {
+				jQuery("#gallery").nanoGallery({
+					kind:'flickr',
+					userID: '!{flickr_id}',
+					photoset: '!{ev.photoAlbumId}',
+					paginationMaxLinesPerPage:5,
+				});
+			})

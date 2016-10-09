@@ -1,0 +1,32 @@
+include event-project
+
+mixin event(ev)
+
+	- var today = new Date();
+
+	.tile.ph-1.pv-1
+		.meetup-calendar.calendar.hidden-xs.hidden-sm(class=ev.state == 'past' ? 'calendar--past' : null)
+			.calendar__header=ev._.startDate.format('MMM')
+			.calendar__body
+				.calendar__date=ev._.startDate.format('DD')
+				.calendar__year=ev._.startDate.format('YYYY')
+		.meetup-content
+			h2.mv-5
+				a(href='/events/' + ev.key)
+					=ev.name
+			if(ev.place)
+				h5.mb-1=ev.place
+				if(ev.map)
+					h5=ev.map + ' '
+						span |
+						a(href='http://maps.google.co.uk/?daddr='+ ev.map, target='_blank') Get Directions
+			h5.mb-1=ev._.startDate.format('dddd D MMM YYYY')
+				|  from #{ev._.startDate.format('h:mma')} - #{ev._.endDate.format('h:mma')}
+			if ev.facebook
+				div.row
+					span.entypo-social.entypo-facebook.project-contact
+					a(href=ev.facebook, target='_blank', data-toggle='tooltip', data-placement='top')=ev.name
+			if ev.raised
+				h6 You raised £ #{ev.raised}!
+			
+			

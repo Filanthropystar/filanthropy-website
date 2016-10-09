@@ -1,0 +1,17 @@
+extends ../layouts/default
+include ../mixins/featuredProject
+include ../mixins/projectTile
+
+block intro
+	.container-md
+		.page-intro
+			h1.page-title Projects
+			if featuredProject
+				+featuredProject(featuredProject)
+
+			h2.lead All the Projects we've featured at Filanthropy* to date.
+			if otherProjects.length
+				.row
+					each project in otherProjects
+						+projectTile(project)
+

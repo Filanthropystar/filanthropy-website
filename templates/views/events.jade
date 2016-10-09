@@ -1,0 +1,40 @@
+extends ../layouts/default
+include ../mixins/event
+
+block intro
+	.container-sm
+		.page-intro
+			h1.page-title Events
+			p.lead We usually have an event every quarter. We hope to see you at the next one!
+				| Stay in the loop - 
+				a(href='http://twitter.com/filanthropystar', target='_blank') follow us on twitter
+
+		if upcomingEvent
+			+event(upcomingEvent)
+block content
+	.page-content: .container
+		.timeline
+			.timeline-path
+			.timeline-item--offset
+			each ev, i in pastEvents
+				.timeline-item(class=i % 2 == 1 ? 'timeline-item--even' : 'timeline-item--odd')
+					.timeline-item-node
+					a(href='/events/' + ev.key).timeline-item-inner
+						h6.text-caps.text-danger= ev._.startDate.format('YYYY - MMMM ')
+						h4= ev.name 
+						| #{ev.place}
+						if(ev.raised)
+							p We raised £#{ev.raised}!
+						if ev.state == 'past' && ev.review
+							p!=utils.cropString( utils.htmlToText(ev.review), 240, '...', true )
+						else
+							p!=utils.cropString( utils.htmlToText(ev.description), 240, '...', true )
+						
+		
+		if !upcomingEvent && !pastEvents.length
+			h3.text-muted There are no events yet.
+
+//- block js
+	// twitter
+	script.
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

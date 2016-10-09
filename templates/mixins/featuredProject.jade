@@ -1,0 +1,10 @@
+mixin featuredProject(project)
+	article#hero.hero-meetup.hero-meetup--next
+			
+			//- Intro
+			.tile.ph-1.pv-1
+					h5.subtitle Featured Project
+					h2.project-title
+						a(href='/projects/' + project.key, itemprop='url')=project.name
+					p.byline!=project.shortDescription
+			
