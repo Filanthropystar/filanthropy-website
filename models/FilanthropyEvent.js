@@ -75,8 +75,6 @@ FilanthropyEvent.schema.pre('save', function(next) {
 });
 
 
-
-
 // Methods
 // ------------------------------
 
