@@ -71,7 +71,7 @@ $(function() {
 	// start on the right pane
 	// defaults to "join"
 	// options "signin" | "join" | "password"
-	$("[href='#modal-auth'], [data-modal='auth'], .js-auth-trigger").click( function(e) {
+	$("[href='#modal-auth'], [data-modal='auth']").click( function(e) {
 		
 		e.preventDefault();
 		
