@@ -1,4 +1,0 @@
-loggingEnabled: true
-logDirectory: iisnode
-devErrorsEnabled: false
-nodeProcessCommandLine: "D:\Program Files (x86)\nodejs\6.7.0\node.exe"
