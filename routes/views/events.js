@@ -17,12 +17,14 @@ exports = module.exports = function(req, res) {
 			.where('state', 'active')
 			.sort('-startDate')
 	, 'projects');
+
+	locals
 	
 	view.query('pastEvents',
 		FilanthropyEvent.model.find()
 			.where('state', 'past')
 			.sort('-startDate')
-	);
+	);	
 	
 	
 	view.render('events');
