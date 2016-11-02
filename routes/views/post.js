@@ -23,6 +23,7 @@ exports = module.exports = function (req, res) {
 		}).populate('author categories');
 
 		q.exec(function (err, result) {
+			console.log(result);
 			locals.data.post = result;
 			next(err);
 		});
