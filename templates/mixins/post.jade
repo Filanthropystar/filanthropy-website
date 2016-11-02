@@ -10,7 +10,7 @@ mixin post(post)
 
 				h4(itemprop='name').post-title.mv-1
 					a(href='/blog/post/' + post.slug, itemprop='url')=post.title
-				.post-content-brief(itemprop='description')!=utils.cropString( utils.htmlToText(post.content), 240, '...', true )
+				.post-content-brief(itemprop='description')!=utils.cropString( utils.htmlToText(post.content.extended), 240, '...', true )
 	//-article(role="article", itemscope itemtype="http://schema.org/BlogPosting").blog-post
 		.blog-post__date.illustrative-heading
 			span.illustrative-heading__line
